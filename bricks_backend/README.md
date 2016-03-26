@@ -24,16 +24,21 @@ Using this template to create a new Django app is easy::
 You can replace ``helloworld`` with your desired project name.
 
 ## Deployment to Heroku
+    $ If this is a new heroku app:
+    - Create the app on heroku
+    - Connect the app with a branch on github
+    - Deploy manually from heroku a first time (next times deployment will be launch automatically)
+    - Then you need to init the db and create admin account:
+    `heroku --app [APP_NAME] run bash` to connect to your app heroku server
+    `./manage.py migrate` it will initialize the db
+    `./manage.py createsuperuser` to create an admin account
+    `./manage.py shell`
+    `from django.contrib.sites.models import Site`
+    `s = Site.objects.get()``
+    `s.domain = [HEROKU_DOMAIN_URL]` where [HEROKU_DOMAIN_URL] is the domain you get from heroku acces page
+    `s.save`
 
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
-
-    $ heroku create
-    $ git push heroku master
-
-    $ heroku run python manage.py migrate
-
+    
 See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
 
 ## Further Reading
