@@ -3,13 +3,6 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-FILE_CATEGORIES = (
-    (0, 'Introduction'),
-    (1, 'Presentation'),
-    (2, 'Team Presentation'),
-    (3, 'Conclusion')
-)
-
 class Company(models.Model):
     class Meta:
         db_table = 'company'
@@ -29,14 +22,14 @@ class BricksUser(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
 
-class SlideSlice(models.Model):
+class Brick(models.Model):
     class Meta:
-        db_table = 'slide_slice'
+        db_table = 'brick'
         app_label = 'bricks'
 
     name = models.CharField(max_length=255, blank=False)
     start = models.IntegerField(blank=False)
     count = models.IntegerField(blank=False)
     remote_path = models.CharField(max_length=255, blank=False)
-    category = models.CharField(choices=FILE_CATEGORIES, max_length=255, blank=False)
-    user = models.ForeignKey(BricksUser, on_delete=models.CASCADE)
+    column = models.IntegerField()
+    checked = models.BooleanField()
